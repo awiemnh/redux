@@ -1,20 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { View, Text, FlatList, StyleSheet, Button } from "react-native";
+import { View, Text, FlatList, StyleSheet, Button, Modal, TextInput } from "react-native";
 import { deleteNote, updateNote } from "../actions/notesActions";
 
 const NoteList = () => {
   const notes = useSelector((state) => state.notes);
   const dispatch = useDispatch();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [updatedNote, setUpdatedNote] = useState("");
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleDelete = (index) => {
     dispatch(deleteNote(index));
   };
 
   const handleUpdate = (index, updatedNote) => {
-    const newNote = prompt("Enter updated note:");
-    if (newNote !== null) {
-      dispatch(updateNote(index, newNote));
+    setSelectedIndex(index);
+    setUpdatedNote(updatedNote);
+    setIsModalVisible(true);
+  };
+
+  const updateNoteHandler = () => {
+    if (updatedNote.trim() !== "") {
+      dispatch(updateNote(selectedIndex, updatedNote));
+      setIsModalVisible(false);
     }
   };
 
@@ -42,6 +51,17 @@ const NoteList = () => {
           </View>
         )}
       />
+      <Modal visible={isModalVisible} animationType="slide">
+        <View style={styles.modalContainer}>
+          <TextInput
+            style={styles.input}
+            onChangeText={setUpdatedNote}
+            value={updatedNote}
+          />
+          <Button title="Update" onPress={updateNoteHandler} />
+          <Button title="Cancel" onPress={() => setIsModalVisible(false)} />
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -74,6 +94,19 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     alignItems: "center",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 10,
+    marginBottom: 10,
+    width: "80%",
+    borderRadius: 5,
   },
 });
 

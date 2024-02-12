@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addNote, deleteNote } from "../actions/notesActions";
+import { addNote } from "../actions/notesActions";
 import {
   View,
   TextInput,
@@ -10,6 +10,7 @@ import {
   Text,
 } from "react-native";
 
+
 const NoteForm = () => {
   const [noteText, setNoteText] = useState("");
   const dispatch = useDispatch();
@@ -17,16 +18,8 @@ const NoteForm = () => {
   const handleAddNote = () => {
     if (noteText.trim() !== "") {
       dispatch(addNote(noteText));
-      setNoteText("");
+      setNoteText(" ");
     }
-  };
-
-  const handleDeleteNote = () => {
-    // if (noteText.trim() !== "") {
-    dispatch(deleteNote(noteText));
-    setNoteText("");
-    console.log("asagyvyf");
-    //}
   };
 
   return (
@@ -37,18 +30,9 @@ const NoteForm = () => {
         value={noteText}
         onChangeText={(text) => setNoteText(text)}
       />
-      {/* <Button
-        style={styles.button}
-        title="Tambah Note"
-        onPress={handleAddNote}
-      /> */}
       <View style={styles.bottonGroup}>
         <TouchableOpacity style={styles.button} onPress={handleAddNote}>
           <Text style={styles.buttonText}>Tambah Notes</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={handleDeleteNote}>
-          <Text style={styles.buttonText}>Delete</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -70,7 +54,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 24,
     margin: 4,
-    color: "white",
   },
   button: {
     backgroundColor: "#EB455F",
@@ -84,7 +67,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "500",
     paddingHorizontal: 12,
     textAlign: "center",

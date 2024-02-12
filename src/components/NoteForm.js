@@ -10,6 +10,7 @@ import {
   Text,
 } from "react-native";
 
+
 const NoteForm = () => {
   const [noteText, setNoteText] = useState("");
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const NoteForm = () => {
   const handleAddNote = () => {
     if (noteText.trim() !== "") {
       dispatch(addNote(noteText));
-      setNoteText("");
+      setNoteText(" ");
     }
   };
 
@@ -28,7 +29,7 @@ const NoteForm = () => {
     console.log("berhasil di hapus");
     //}
   };
-
+  
   return (
     <View>
       <TextInput
@@ -37,16 +38,10 @@ const NoteForm = () => {
         value={noteText}
         onChangeText={(text) => setNoteText(text)}
       />
-      {/* <Button
-        style={styles.button}
-        title="Tambah Note"
-        onPress={handleAddNote}
-      /> */}
       <View style={styles.bottonGroup}>
         <TouchableOpacity style={styles.button} onPress={handleAddNote}>
           <Text style={styles.buttonText}>Tambah Notes</Text>
         </TouchableOpacity>
-
         <TouchableOpacity style={styles.button} onPress={handleDeleteNoteAll}>
           <Text style={styles.buttonText}>Hapus Semua</Text>
         </TouchableOpacity>
@@ -70,7 +65,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 24,
     margin: 4,
-    color: "white",
   },
   button: {
     backgroundColor: "#EB455F",
@@ -84,7 +78,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "500",
     paddingHorizontal: 12,
     textAlign: "center",

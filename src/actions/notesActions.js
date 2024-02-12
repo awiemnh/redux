@@ -5,9 +5,16 @@ export const addNote = (note) => {
   };
 };
 
-export const deleteNote = (note) => {
+export const deleteNote = (index) => {
   return {
     type: "DELETE_NOTE",
-    payload: note,
+    payload: index,
+  };
+};
+
+export const updateNote = (index, updatedNote) => {
+  return {
+      type: 'UPDATE_NOTE',
+      payload: { index, updatedNote },
   };
 };

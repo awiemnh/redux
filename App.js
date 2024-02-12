@@ -4,18 +4,21 @@ import { createStore } from "redux";
 import notesReducer from "./src/reducers/notesReducer";
 import NoteForm from "./src/components/NoteForm";
 import NoteList from "./src/components/NoteList";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 
 const store = createStore(notesReducer);
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <View style={styles.container}>
-        <NoteForm />
-        <NoteList />
-      </View>
-    </Provider>
+    <View style={styles.container}>
+      <Text>Test </Text>
+      <Provider store={store}>
+        <View>
+          <NoteForm />
+          <NoteList />
+        </View>
+      </Provider>
+    </View>
   );
 };
 

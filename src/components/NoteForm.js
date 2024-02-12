@@ -10,6 +10,7 @@ import {
   Text,
 } from "react-native";
 
+
 const NoteForm = () => {
   const [noteText, setNoteText] = useState("");
   const dispatch = useDispatch();

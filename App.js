@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { Store } from './src/store';
+import { Store } from './src/store/store';
 import { Provider } from 'react-redux';
-import CounterComponent from './src/components'
+import CounterComponent from './src/components/CounterComponent'
 
 const App = () => {
   return (

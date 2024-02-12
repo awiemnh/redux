@@ -34,6 +34,9 @@ const NoteList = () => {
       dispatch(updateNote(selectedIndex, updatedNote));
       setIsModalVisible(false);
     }
+    if (updatedNote.trim() === "") {
+      alert("Jangan kosong tolol");
+    }
   };
 
   return (

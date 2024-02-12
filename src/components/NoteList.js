@@ -1,23 +1,22 @@
-// components/NoteList.js
 import React from "react";
-import { useSelector } from "react-redux";
-import {
-  View,
-  Text,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity,
-  slice,
-} from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { View, Text, FlatList, StyleSheet, Button } from "react-native";
+import { deleteNote, updateNote } from "../actions/notesActions";
 
 const NoteList = () => {
   const notes = useSelector((state) => state.notes);
+  const dispatch = useDispatch();
 
-  // const handleDeleteNote = () => {
-  //   {
-  //     temp = state.notes.pop();
-  //   }
-  // };
+  const handleDelete = (index) => {
+    dispatch(deleteNote(index));
+  };
+
+  const handleUpdate = (index, updatedNote) => {
+    const newNote = prompt("Enter updated note:");
+    if (newNote !== null) {
+      dispatch(updateNote(index, newNote));
+    }
+  };
 
   return (
     <View>
@@ -25,8 +24,24 @@ const NoteList = () => {
       <FlatList
         data={notes}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => <Text style={styles.fontlist}>{item}</Text>}
-      ></FlatList>
+        renderItem={({ item, index }) => (
+          <View style={styles.listItem}>
+            <Text style={styles.fontlist}>{item}</Text>
+            <View style={styles.buttonContainer}>
+              <Button
+                title="Delete"
+                onPress={() => handleDelete(index)}
+                color="#EB455F"
+              />
+              <Button
+                title="Update"
+                onPress={() => handleUpdate(index, item)}
+                color="#EB455F"
+              />
+            </View>
+          </View>
+        )}
+      />
     </View>
   );
 };
@@ -37,24 +52,28 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: "center",
     padding: 6,
-    color: "white",
   },
-  list: {
-    borderWidth: 3,
+  listItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginVertical: 8,
+    marginHorizontal: 16,
   },
   fontlist: {
     flex: 1,
-    flexDirection: "row",
     color: "#EB455F",
     fontWeight: "700",
     fontSize: 18,
     borderWidth: 2,
     padding: 10,
-    margin: 4,
     borderRadius: 8,
     borderColor: "#EB455F",
-
     textAlign: "center",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
 

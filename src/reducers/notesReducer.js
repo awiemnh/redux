@@ -8,7 +8,14 @@ const notesReducer = (state = initialState, action) => {
     case "DELETE_NOTE":
       return {
         ...state,
-        notes: [],
+        notes: state.notes.filter((note, index) => index !== action.payload),
+      };
+      case "UPDATE_NOTE":
+      return {
+        ...state,
+        notes: state.notes.map((note, index) =>
+          index === action.payload.index ? action.payload.updatedNote : note
+        ),
       };
     default:
       return state;

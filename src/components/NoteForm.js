@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { addNote } from "../actions/notesActions";
 import { View, TextInput, Button } from "react-native";
 
+
 const NoteForm = () => {
   const [noteText, setNoteText] = useState("");
   const dispatch = useDispatch();

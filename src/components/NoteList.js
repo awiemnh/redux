@@ -1,10 +1,23 @@
 // components/NoteList.js
 import React from "react";
 import { useSelector } from "react-redux";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  slice,
+} from "react-native";
 
 const NoteList = () => {
   const notes = useSelector((state) => state.notes);
+
+  // const handleDeleteNote = () => {
+  //   {
+  //     temp = state.notes.pop();
+  //   }
+  // };
 
   return (
     <View>
@@ -13,7 +26,7 @@ const NoteList = () => {
         data={notes}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => <Text style={styles.fontlist}>{item}</Text>}
-      />
+      ></FlatList>
     </View>
   );
 };
@@ -24,6 +37,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: "center",
     padding: 6,
+    color: "white",
   },
   list: {
     borderWidth: 3,

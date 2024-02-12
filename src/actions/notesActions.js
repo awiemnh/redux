@@ -12,16 +12,16 @@ export const deleteNote = (index) => {
   };
 };
 
-export const deleteAllNote = (note) => {
+export const updateNote = (index, updatedNote) => {
   return {
-    type: "DELETEALL_NOTE",
-    payload: note,
+    type: "UPDATE_NOTE",
+    payload: { index, updatedNote },
   };
 };
 
-export const editNote = (note) => {
+export const deleteAllNote = (note) => {
   return {
-    type: "EDIT_NOTE",
+    type: "DELETEALL_NOTE",
     payload: note,
   };
 };

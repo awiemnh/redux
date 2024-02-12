@@ -10,7 +10,6 @@ import {
   Text,
 } from "react-native";
 
-
 const NoteForm = () => {
   const [noteText, setNoteText] = useState("");
   const dispatch = useDispatch();
@@ -29,7 +28,7 @@ const NoteForm = () => {
     console.log("berhasil di hapus");
     //}
   };
-  
+
   return (
     <View>
       <TextInput
@@ -65,6 +64,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 24,
     margin: 4,
+    color: "white",
   },
   button: {
     backgroundColor: "#EB455F",

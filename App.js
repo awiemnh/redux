@@ -2,13 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { Store } from './src/store/store';
 import { Provider } from 'react-redux';
-import CounterComponent from './src/components/CounterComponent'
+import CounterComponent from './src/components/CounterComponent';
 
 const App = () => {
   return (
-    <Provider store={store}>
-    <CounterComponent />
-    </Provider>
+    <View>
+      test
+    </View>
   )
 }
 

@@ -4,18 +4,21 @@ import { createStore } from "redux";
 import notesReducer from "./src/reducers/notesReducer";
 import NoteForm from "./src/components/NoteForm";
 import NoteList from "./src/components/NoteList";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 
 const store = createStore(notesReducer);
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <View style={styles.container}>
-        <NoteForm />
-        <NoteList />
-      </View>
-    </Provider>
+    <View style={styles.container}>
+      <Text style={styles.judul}>Test </Text>
+      <Provider store={store}>
+        <View>
+          <NoteForm />
+          <NoteList />
+        </View>
+      </Provider>
+    </View>
   );
 };
 
@@ -24,8 +27,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 220,
-    color: "#00008B",
+    paddingTop: 220,
+    backgroundColor: "#2B3467",
+  },
+  judul: {
+    fontWeight: "800",
+    color: "white",
+    fontSize: 32,
+    padding: 24,
   },
 });
 

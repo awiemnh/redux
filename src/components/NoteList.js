@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { View, Text, FlatList, StyleSheet, Button, Modal, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  Button,
+  Modal,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import { deleteNote, updateNote } from "../actions/notesActions";
 
 const NoteList = () => {
@@ -28,7 +37,7 @@ const NoteList = () => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.judul}>Notes:</Text>
       <FlatList
         data={notes}
@@ -58,8 +67,18 @@ const NoteList = () => {
             onChangeText={setUpdatedNote}
             value={updatedNote}
           />
-          <Button title="Update" onPress={updateNoteHandler} />
-          <Button title="Cancel" onPress={() => setIsModalVisible(false)} />
+          <View style={styles.bottonGroup}>
+            <TouchableOpacity style={styles.button} onPress={updateNoteHandler}>
+              <Text style={styles.buttonText}>Update</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => setIsModalVisible(false)}
+            >
+              <Text style={styles.buttonText}>Gajadi</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </Modal>
     </View>
@@ -67,38 +86,46 @@ const NoteList = () => {
 };
 
 const styles = StyleSheet.create({
+  comtainer: {
+    flex: 1,
+  },
   judul: {
     fontWeight: "700",
     fontSize: 24,
     textAlign: "center",
     padding: 6,
+    color: "#fff",
   },
   listItem: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
     marginVertical: 8,
     marginHorizontal: 16,
   },
   fontlist: {
     flex: 1,
-    color: "#EB455F",
+    color: "white",
     fontWeight: "700",
     fontSize: 18,
-    borderWidth: 2,
+    borderWidth: 1,
     padding: 10,
     borderRadius: 8,
     borderColor: "#EB455F",
     textAlign: "center",
+    width: 300,
+    justifyContent: "flex-end",
   },
   buttonContainer: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "bottom",
   },
   modalContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#2B3467",
   },
   input: {
     borderWidth: 1,
@@ -106,7 +133,32 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     width: "80%",
-    borderRadius: 5,
+    borderRadius: 120,
+    color: "white",
+    fontWeight: 800,
+    fontSize: 24,
+    borderColor: "#EB455F",
+  },
+  button: {
+    backgroundColor: "#EB455F",
+    padding: 10,
+    margin: 10,
+    borderRadius: 24,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 6,
+    shadowOpacity: 0.26,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: "500",
+    paddingHorizontal: 12,
+    textAlign: "center",
+  },
+  bottonGroup: {
+    padding: 10,
+    paddingVertical: 20,
   },
 });
 

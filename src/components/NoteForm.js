@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addNote } from "../actions/notesActions";
+import { addNote, deleteAllNote } from "../actions/notesActions";
 import {
   View,
   TextInput,
@@ -22,6 +22,14 @@ const NoteForm = () => {
     }
   };
 
+  const handleDeleteNoteAll = () => {
+    // if (noteText.trim() !== "") {
+    dispatch(deleteAllNote(noteText));
+    setNoteText("");
+    console.log("berhasil di hapus");
+    //}
+  };
+  
   return (
     <View>
       <TextInput
@@ -33,6 +41,9 @@ const NoteForm = () => {
       <View style={styles.bottonGroup}>
         <TouchableOpacity style={styles.button} onPress={handleAddNote}>
           <Text style={styles.buttonText}>Tambah Notes</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleDeleteNoteAll}>
+          <Text style={styles.buttonText}>Hapus Semua</Text>
         </TouchableOpacity>
       </View>
     </View>

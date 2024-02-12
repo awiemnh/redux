@@ -14,7 +14,14 @@ export const deleteNote = (index) => {
 
 export const updateNote = (index, updatedNote) => {
   return {
-      type: 'UPDATE_NOTE',
-      payload: { index, updatedNote },
+    type: "UPDATE_NOTE",
+    payload: { index, updatedNote },
+  };
+};
+
+export const deleteAllNote = (note) => {
+  return {
+    type: "DELETEALL_NOTE",
+    payload: note,
   };
 };

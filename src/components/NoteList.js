@@ -1,35 +1,44 @@
-import React, { useDebugValue } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   View,
   Text,
   FlatList,
   StyleSheet,
-  TouchableOpacity,
-  slice,
   Button,
+  Modal,
+  TextInput,
+  TouchableOpacity,
 } from "react-native";
-import { deleteNote } from "../actions/notesActions";
+import { deleteNote, updateNote } from "../actions/notesActions";
 
 const NoteList = () => {
   const notes = useSelector((state) => state.notes);
   const dispatch = useDispatch();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [updatedNote, setUpdatedNote] = useState("");
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleDelete = (index) => {
     dispatch(deleteNote(index));
   };
 
   const handleUpdate = (index, updatedNote) => {
-    const newNote = prompt("Enter updated note:");
-    if (newNote !== null) {
-      dispatch(updateNote(index, newNote));
+    setSelectedIndex(index);
+    setUpdatedNote(updatedNote);
+    setIsModalVisible(true);
+  };
+
+  const updateNoteHandler = () => {
+    if (updatedNote.trim() !== "") {
+      dispatch(updateNote(selectedIndex, updatedNote));
+      setIsModalVisible(false);
     }
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.judul}>Notes:</Text>
-
       <FlatList
         data={notes}
         keyExtractor={(item, index) => index.toString()}
@@ -51,6 +60,27 @@ const NoteList = () => {
           </View>
         )}
       />
+      <Modal visible={isModalVisible} animationType="slide">
+        <View style={styles.modalContainer}>
+          <TextInput
+            style={styles.input}
+            onChangeText={setUpdatedNote}
+            value={updatedNote}
+          />
+          <View style={styles.bottonGroup}>
+            <TouchableOpacity style={styles.button} onPress={updateNoteHandler}>
+              <Text style={styles.buttonText}>Update</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => setIsModalVisible(false)}
+            >
+              <Text style={styles.buttonText}>Gajadi</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -64,28 +94,71 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: "center",
     padding: 6,
+    color: "#fff",
   },
   listItem: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
     marginVertical: 8,
     marginHorizontal: 16,
   },
   fontlist: {
     flex: 1,
-    color: "#EB455F",
+    color: "white",
     fontWeight: "700",
     fontSize: 18,
-    borderWidth: 2,
+    borderWidth: 1,
     padding: 10,
     borderRadius: 8,
     borderColor: "#EB455F",
     textAlign: "center",
+    width: 300,
+    justifyContent: "flex-end",
   },
   buttonContainer: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "bottom",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#2B3467",
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 10,
+    marginBottom: 10,
+    width: "80%",
+    borderRadius: 120,
+    color: "white",
+    fontWeight: 800,
+    fontSize: 24,
+    borderColor: "#EB455F",
+  },
+  button: {
+    backgroundColor: "#EB455F",
+    padding: 10,
+    margin: 10,
+    borderRadius: 24,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 6,
+    shadowOpacity: 0.26,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: "500",
+    paddingHorizontal: 12,
+    textAlign: "center",
+  },
+  bottonGroup: {
+    padding: 10,
+    paddingVertical: 20,
   },
 });
 

@@ -11,7 +11,7 @@ const store = createStore(notesReducer);
 const App = () => {
   return (
     <View style={styles.container}>
-      <Text>Test </Text>
+      <Text style={styles.judul}>Test </Text>
       <Provider store={store}>
         <View>
           <NoteForm />
@@ -29,6 +29,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 220,
     backgroundColor: "#2B3467",
+  },
+  judul: {
+    fontWeight: "800",
+    color: "white",
+    fontSize: 32,
+    padding: 24,
   },
 });
 

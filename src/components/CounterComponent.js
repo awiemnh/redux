@@ -1,7 +1,7 @@
 // CounterComponent.js
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { increment, decrement } from "./actions";
+import { increment, decrement } from "../actions/actions";
 
 const CounterComponent = () => {
   const count = useSelector((state) => state.count);
